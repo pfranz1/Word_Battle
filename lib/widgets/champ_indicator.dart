@@ -10,13 +10,19 @@ class ChampIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250,
+      width: 325,
       child: Row(
         mainAxisAlignment: champSide == Side.left
             ? MainAxisAlignment.start
             : MainAxisAlignment.end,
         children: [
-          Icon(Icons.ac_unit),
+          Container(
+            height: 100,
+            child: Image.asset(
+              './assets/images/crown.png',
+              fit: BoxFit.fill,
+            ),
+          )
         ],
       ),
     );
