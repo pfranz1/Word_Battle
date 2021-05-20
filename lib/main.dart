@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:ordered_set/ordered_set.dart';
@@ -80,12 +82,19 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Word Battle',
-            textAlign: TextAlign.center,
-          ),
+        centerTitle: true,
+        title: Text(
+          'Word Battle',
+          textAlign: TextAlign.left,
         ),
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Image.asset('./assets/images/trophy_white.png'),
+              )),
+        ],
       ),
       body: Center(
         child: Column(
