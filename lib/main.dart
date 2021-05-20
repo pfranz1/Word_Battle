@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:ordered_set/ordered_set.dart';
-import 'package:word_battle/widgets/champ_indicator.dart';
 
+import './widgets/champ_indicator.dart';
+import './widgets/graveyard.dart';
 import './widgets/word_card.dart';
+
 import 'models/sideEnum.dart';
 import 'models/tombstone.dart';
 
@@ -36,8 +38,8 @@ class _MainPageState extends State<MainPage> {
   Side champSide = Side.left;
   int champStreak = 0;
 
-  OrderedSet<Tombstone> graveYard =
-      OrderedSet<Tombstone>((a, b) => a.streak - b.streak);
+  OrderedSet<Tombstone> graveyard =
+      OrderedSet<Tombstone>((a, b) => b.streak - a.streak);
 
   void cardSelected(Side sideEnum) {
     switch (sideEnum) {
@@ -46,8 +48,8 @@ class _MainPageState extends State<MainPage> {
           if (champSide != Side.right) {
             //Champ loss
             champSide = Side.right;
-            print('final champ streak for $leftWord was $champStreak');
-            graveYard.add(Tombstone(leftWord, champStreak, rightWord));
+            //print('final champ streak for $leftWord was $champStreak');
+            graveyard.add(Tombstone(leftWord, champStreak, rightWord));
             champStreak = 1;
           } else {
             //Champ win
@@ -62,8 +64,8 @@ class _MainPageState extends State<MainPage> {
           if (champSide != Side.left) {
             //Champ loss
             champSide = Side.left;
-            print('final champ streak for $rightWord was $champStreak');
-            graveYard.add(Tombstone(rightWord, champStreak, leftWord));
+            //print('final champ streak for $rightWord was $champStreak');
+            graveyard.add(Tombstone(rightWord, champStreak, leftWord));
             champStreak = 1;
           } else {
             //Champ win
@@ -91,7 +93,20 @@ class _MainPageState extends State<MainPage> {
           Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  String champName =
+                      champSide == Side.left ? leftWord : rightWord;
+
+                  graveyard.removeWhere((element) {
+                    return (element.causeOfDeath == '-');
+                  });
+                  graveyard.add(Tombstone(champName, champStreak, "-"));
+                  //print(graveyard.toString());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Graveyard(graveyard)));
+                },
                 child: Image.asset('./assets/images/trophy_white.png'),
               )),
         ],

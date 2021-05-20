@@ -4,4 +4,9 @@ class Tombstone {
   final String causeOfDeath;
 
   Tombstone(this.name, this.streak, this.causeOfDeath);
+
+  @override
+  String toString() {
+    return '${name} : ${streak}';
+  }
 }
