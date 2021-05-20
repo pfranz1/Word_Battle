@@ -9,13 +9,18 @@ class ChampIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    SizedBox(
       width: 325,
       child: Row(
-        mainAxisAlignment: champSide == Side.left
-            ? MainAxisAlignment.start
-            : MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          champSide != Side.left
+              ? SizedBox(
+                  width: 225,
+                )
+              : SizedBox(
+                  width: 0,
+                ),
           Container(
             height: 100,
             child: Image.asset(
@@ -28,3 +33,6 @@ class ChampIndicator extends StatelessWidget {
     );
   }
 }
+//champSide == Side.left
+// ? MainAxisAlignment.start
+// : MainAxisAlignment.end,

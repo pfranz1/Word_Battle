@@ -8,10 +8,9 @@ class WordCard extends StatelessWidget {
   final Side _side;
   final Function _tapHandler;
 
-  static const List AVAILABLE_FONTS = []
+  static const List AVAILABLE_FONTS = ['OpenSans', 'Roboto'];
 
-
-  String getRadomFont() {
+  String getRandomFont() {
     Random rng = new Random();
     return AVAILABLE_FONTS[rng.nextInt(AVAILABLE_FONTS.length)];
   }
@@ -35,7 +34,7 @@ class WordCard extends StatelessWidget {
                 child: Text(
                   _title,
                   style: TextStyle(
-                    fontFamily: getRandomFont(),
+                    fontFamily: 'OpenSans',
                     fontSize: 24,
                   ),
                 ),
